@@ -1,0 +1,22 @@
+{
+    "name": "oxemis/oximailing",
+    "description": "PHP wrapper for the OxiMailing API",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Oxemis\\OxiMailing\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "oxemis",
+            "email": "support@oxemis.com"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "^7.8",
+        "ext-json": "*",
+        "ext-fileinfo": "*"
+    }
+}
