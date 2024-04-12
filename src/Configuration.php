@@ -8,5 +8,5 @@ class Configuration
 {
     public const WRAPPER_VERSION = "1.0.0";
     public const USER_AGENT = 'oximailing-php/';
-    public const MAIN_URL = 'api.oximailing.com';
+    public const MAIN_URL = 'https://api.oximailing.com';
 }

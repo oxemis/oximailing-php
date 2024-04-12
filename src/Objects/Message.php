@@ -595,7 +595,7 @@ class Message implements JsonSerializable
             if (!empty($recipient->getName())) {
                 $r["Name"] = $recipient->getName();
             }
-            if (!empty($recipient->getMetaData())) $r["MetaData "] = $recipient->getMetaData();
+            if (!empty($recipient->getMetaData())) $r["MetaData"] = $recipient->getMetaData();
             if (!empty($recipient->getToken())) $r["Token"] = $recipient->getToken();
             $json["Recipients"][] = $r;
 

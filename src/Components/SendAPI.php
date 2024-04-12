@@ -5,6 +5,8 @@ namespace Oxemis\OxiMailing\Components;
 use Oxemis\OxiMailing\ApiClient;
 use Oxemis\OxiMailing\ApiException;
 use Oxemis\OxiMailing\Objects\Message;
+use Oxemis\OxiMailing\Objects\ScheduledSending;
+use Oxemis\OxiMailing\Objects\Sending;
 
 /**
  * Class for https://api.oximailing.com/doc/#/send
@@ -22,22 +24,23 @@ class SendAPI extends Component
 
     /**
      * @param Message $message  The Message you want to send.
-     * @return object           Informations about the sending (see API doc for details).
+     * @return Sending          Informations about the sending (see API doc for details).
      * @throws ApiException
      */
-    public function send(Message $message): object
+    public function send(Message $message): Sending
     {
-        return ($this->request("POST", "/send", null, json_encode($message)));
+        return ($this->sendJSON(json_encode($message)));
     }
 
     /**
      * @param string $JSONMessage   The JSON representation of the message you want to send (see :https://api.oximailing.com/doc/#/send/post_send).
-     * @return object               Informations about the sending (see API doc for details).
+     * @return Sending              Informations about the sending (see API doc for details).
      * @throws ApiException
      */
-    public function sendJSON(string $JSONMessage): object
+    public function sendJSON(string $JSONMessage): Sending
     {
-        return ($this->request("POST", "/send", null, $JSONMessage));
+        $result = ($this->request("POST", "/send", null, $JSONMessage));
+        return Sending::mapFromStdClass($result);
     }
 
     /**
@@ -46,7 +49,16 @@ class SendAPI extends Component
      */
     public function getScheduled(): ?array
     {
-        return ($this->request("GET", "/scheduled"));
+        $sendings = $this->request("GET", "/scheduled");
+        if (!is_null($sendings)) {
+            $list = [];
+            foreach ($sendings as $sending) {
+                $list[] = ScheduledSending::mapFromStdClass($sending);
+            }
+            return $list;
+        } else {
+            return null;
+        }
     }
 
     /**
