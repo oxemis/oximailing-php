@@ -10,6 +10,15 @@ To get started, create an account and request your free credits on [this page](h
 
 This library is a wrapper for the [OxiMailing API](https://api.oximailing.com) but you don't have to know how to use the API to get started with this library.
 
+## What is OxiMailing ?
+
+OxiMailing is a solution designed to enable you to **send your emails quickly and easily and in the best possible conditions**. 
+
+From transactional emails to massive campaigns, we can handle all your needs.
+
+Founded in 2004, OxiMailing focuses on the **deliverability of your emails**. Our experience and knowledge of the email world enable us to offer you an exceptional quality of service.
+We're a small team, but we're recognized for the quality of our support and expertise.
+
 ## Table of contents
 
 - [Compatibility](#compatibility)
@@ -34,7 +43,7 @@ Use the below code to install the wrapper:
 
 ## Authentication
 
-This library is a wrapper to the [OxiMailing API](https://api.oximailing).
+This library is a wrapper to the [OxiMailing API](https://api.oximailing.com).
 You can request an API KEY in your [OxiMailing Account](https://account.oxemis.com). Free credits are offered.
 
 You should export your API_LOGIN and API_PASSWORD in order to use them in this library :
@@ -118,7 +127,7 @@ $client->sendAPI->send($mail);
 
 >With this sample, OxiMailing will send **2 emails**, one to **joe@example.com** and another one to **jane@example.com**. Joe will not see Jane and vice versa !
 
-## How to send customized messages ?
+## How to send customized messages?
 With this library you can send customized messages based on templating.
 Basically, every content between `{{` and `}}` will be replaced by the corresponding **recipient metadata**.
 
