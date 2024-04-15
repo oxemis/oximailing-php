@@ -127,6 +127,9 @@ $client->sendAPI->send($mail);
 
 >With this sample, OxiMailing will send **2 emails**, one to **joe@example.com** and another one to **jane@example.com**. Joe will not see Jane and vice versa !
 
+You can also **schedule a sending** by using the `$mail->setScheduledDateTime($selectedDateAndTime)` method.
+
+
 ## How to send customized messages?
 With this library you can send customized messages based on templating.
 Basically, every content between `{{` and `}}` will be replaced by the corresponding **recipient metadata**.
