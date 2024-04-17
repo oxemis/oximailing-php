@@ -2,8 +2,8 @@
 
 namespace Oxemis\OxiMailing\Components;
 
-use Oxemis\OxiMailing\ApiClient;
-use Oxemis\OxiMailing\ApiException;
+use Oxemis\OxiMailing\OxiMailingClient;
+use Oxemis\OxiMailing\OxiMailingException;
 
 /**
  * Class for https://api.oximailing.com/doc/#/senders
@@ -11,14 +11,14 @@ use Oxemis\OxiMailing\ApiException;
 class SendersAPI extends Component
 {
 
-    public function __construct(ApiClient $apiClient)
+    public function __construct(OxiMailingClient $apiClient)
     {
         parent::__construct($apiClient);
     }
 
     /**
      * @return array                List of validated senders.
-     * @throws ApiException
+     * @throws OxiMailingException
      */
     public function getValidatedSenders(): array
     {
@@ -27,7 +27,7 @@ class SendersAPI extends Component
 
     /**
      * @return array                List of pending senders.
-     * @throws ApiException
+     * @throws OxiMailingException
      */
     public function getPendingSenders(): array
     {
@@ -38,7 +38,7 @@ class SendersAPI extends Component
      * @param string $email         The email of the sender you want to add.
      * @param string $language      Language of the validation email sent to validate.
      * @return bool                 OK means that the address has been added and is pending validation.
-     * @throws ApiException
+     * @throws OxiMailingException
      */
     public function addSender(string $email, string $language = "en"): bool
     {
@@ -49,7 +49,7 @@ class SendersAPI extends Component
     /**
      * @param string $email         The email of the sender you want to remove.
      * @return bool
-     * @throws ApiException
+     * @throws OxiMailingException
      */
     public function deleteSender(string $email): bool
     {

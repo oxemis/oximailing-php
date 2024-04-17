@@ -4,8 +4,8 @@ namespace Oxemis\OxiMailing\Components;
 
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Exception\GuzzleException;
-use Oxemis\OxiMailing\ApiClient;
-use Oxemis\OxiMailing\ApiException;
+use Oxemis\OxiMailing\OxiMailingClient;
+use Oxemis\OxiMailing\OxiMailingException;
 
 /**
  * Base class
@@ -16,9 +16,9 @@ abstract class Component {
     private string $baseUrl;
 
     /**
-     * @param ApiClient $apiClient
+     * @param OxiMailingClient $apiClient
      */
-    public function __construct(ApiClient $apiClient)
+    public function __construct(OxiMailingClient $apiClient)
     {
         $this->guzzleClient = new GuzzleClient(
             ['headers' =>
@@ -36,7 +36,7 @@ abstract class Component {
      * @param string $route             Subroute of the component (/user for example)
      * @param array|null $parameters    HTTP query parameters
      * @return mixed                    Object, Array, Null (for 204) - Please check the API documentation
-     * @throws ApiException
+     * @throws OxiMailingException
      */
     protected function request(string $verb, string $route, array $parameters = null, string $body = null)
     {
@@ -60,7 +60,7 @@ abstract class Component {
             );
 
             if (($res->getStatusCode() < 200) or ($res->getStatusCode() > 299)) {
-                throw new ApiException($res->getBody(), $res->getStatusCode());
+                throw new OxiMailingException($res->getBody(), $res->getStatusCode());
             }
 
         } catch (GuzzleException $e) {
@@ -79,13 +79,13 @@ abstract class Component {
             ) {
 
                 // Unkown error - Invalid JSON or JSON without API Exception Properties (code + message)
-                throw new ApiException($e->getMessage(), $e->getCode());
+                throw new OxiMailingException($e->getMessage(), $e->getCode());
 
             }
             else {
 
                 // Error sent by the api (JSON)
-                throw new ApiException($responseBodyAsJSON->Message, $responseBodyAsJSON->Code);
+                throw new OxiMailingException($responseBodyAsJSON->Message, $responseBodyAsJSON->Code);
 
             }
 
@@ -104,7 +104,7 @@ abstract class Component {
 
             if (!$return) {
                 // Invalid JSON
-                throw new ApiException("Invalid JSON answer from API : " . $res->getBody(), 666);
+                throw new OxiMailingException("Invalid JSON answer from API : " . $res->getBody(), 666);
             }
 
         }

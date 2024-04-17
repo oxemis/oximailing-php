@@ -56,21 +56,22 @@ export OXIMAILING_API_PWD='your API password'
 Initialize your **OxiMailing** Client:
 
 ```php
-use \Oxemis\OxiMailing;
+require_once "vendor/autoload.php";
+use Oxemis\OxiMailing\OxiMailingClient;
 
 // getenv will allow us to get the OXIMAILING_API_LOGIN/OXIMAILING_API_PWD variables we created before:
 
 $apilogin = getenv('OXIMAILING_API_LOGIN');
 $apipwd = getenv('OXIMAILING_API_PWD');
 
-$oximailing = new ApiClient($apilogin, $apipwd);
+$oximailing = new OxiMailingClient($apilogin, $apipwd);
 
 // or, without using environment variables:
 
 $apilogin = 'your API login';
 $apipwd = 'your API password';
 
-$oximailing = new ApiClient($apilogin, $apipwd);
+$oximailing = new OxiMailingClient($apilogin, $apipwd);
 ```
 
 ## Getting information about your account
@@ -78,9 +79,10 @@ You will find all the information about your OxiMailing account with the "**User
 Informations returned are documented in the class.
 
 ```php
-require_once "./vendor/autoload.php";
+require_once "vendor/autoload.php";
+use Oxemis\OxiMailing\OxiMailingClient;
 
-$client = new Oxemis\OxiMailing\ApiClient(API_LOGIN,API_PWD);
+$client = new OxiMailingClient(API_LOGIN,API_PWD);
 $user = $client->userAPI->getUser();
 
 echo "Name :" . $user->getCompanyName() . "\n" .
@@ -101,15 +103,14 @@ Every property of the `Message` object is described with PHPDoc.
 Here's a simple sample of how to send a mail :
 
 ```php
-<?php
-require 'vendor/autoload.php';
-use Oxemis\OxiMailing\ApiClient;  
+require_once 'vendor/autoload.php';
+use Oxemis\OxiMailing\OxiMailingClient;  
 use Oxemis\OxiMailing\Objects\Message;
 
 // Create the Client
 $apilogin = 'your API login';
 $apipwd = 'your API password';
-$client = new ApiClient($apilogin, $apipwd);
+$client = new OxiMailingClient($apilogin, $apipwd);
 
 // Define the message
 $mail = new Message();  
@@ -135,10 +136,12 @@ With this library you can send customized messages based on templating.
 Basically, every content between `{{` and `}}` will be replaced by the corresponding **recipient metadata**.
 
 Here is a simple sample :
+
 ```php
+require_once 'vendor/autoload.php';
 use Oxemis\OxiMailing\Objects\Recipient;
 use Oxemis\OxiMailing\Objects\Message;
-use Oxemis\OxiMailing\ApiClient;
+use Oxemis\OxiMailing\OxiMailingClient;
 
 // First of all we need recipients with meta data
 $myFirstRecipient = new Recipient();
@@ -150,8 +153,8 @@ $mySecondRecipient->setEmail("jane@example.com");
 $mySecondRecipient->setMetaData(["Name" => "Jane", "ID" => 2]);
 
 // We create the message with {{custom parts}}
-$m = new Message();  
-$m->addRecipient($myFirstRecipient) 
+$mail = new Message();  
+$mail->addRecipient($myFirstRecipient) 
 ->addRecipient($mySecondRecipient) 
 ->setSender("support@oxemis.com") 
 ->setSenderName("Oxemis") 
@@ -159,8 +162,8 @@ $m->addRecipient($myFirstRecipient)
 ->setHtmlMessage("Hi {{Name}} ! This is your ID : {{ID}}");
 
 // Then we send the two messages in one call !
-$client = new ApiClient(API_LOGIN, API_PWD);
-$client->sendAPI->send($m);
+$client = new OxiMailingClient(API_LOGIN, API_PWD);
+$client->sendAPI->send($mail);
 ```
 
 ## Tracking a message
@@ -171,8 +174,11 @@ Here is a simple sample.
 First send a tracked message :
 
 ```php
+require_once 'vendor/autoload.php';
+use Oxemis\OxiMailing\Objects\Message;
+
 // Define the message
-$mail = new Oxemis\Oximailing\Objects\Message();  
+$mail = new Message();  
 $mail
 ->addRecipientEmail("joe@example.com") 
 ->addRecipientEmail("jane@example.com") 
@@ -186,8 +192,11 @@ $mail
 Then send the message and get the SendingId in return :
 
 ```php
+require_once 'vendor/autoload.php';
+use Oxemis\OxiMailing\OxiMailingClient;
+
 // Create the client
-$client = new \Oxemis\OxiMailing\ApiClient(API_LOGIN,API_PWD);
+$client = new OxiMailingClient(API_LOGIN,API_PWD);
 
 // Send the message
 $sending = $client->sendAPI->send($mail);
@@ -199,10 +208,12 @@ $sid = $sending->getSendingId();
 After that, you'll be able to get events recorded on this message with the tracking API :
 
 ```php
+require_once 'vendor/autoload.php';
 use Oxemis\OxiMailing\Objects\Event;
+use Oxemis\OxiMailing\OxiMailingClient;
 
 // Create the client
-$client = new \Oxemis\OxiMailing\ApiClient(API_LOGIN,API_PWD);
+$client = new OxiMailingClient(API_LOGIN,API_PWD);
 
 // Will return an array of events (or null if none)
 // You can filter on many things, here we use the Sending Id

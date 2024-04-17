@@ -4,7 +4,7 @@ namespace Oxemis\OxiMailing;
 
 use Exception;
 
-class ApiException extends Exception
+class OxiMailingException extends Exception
 {
 
 }

@@ -4,8 +4,8 @@ namespace Oxemis\OxiMailing\Components;
 
 use DateTime;
 use DateTimeInterface;
-use Oxemis\OxiMailing\ApiClient;
-use Oxemis\OxiMailing\ApiException;
+use Oxemis\OxiMailing\OxiMailingClient;
+use Oxemis\OxiMailing\OxiMailingException;
 use Oxemis\OxiMailing\Objects\Event;
 
 /**
@@ -23,7 +23,7 @@ class TrackingAPI extends Component
     public const EVENT_TYPE_SENT = "sent";
     public const EVENT_TYPE_COMPLAINT = "complaint";
 
-    public function __construct(ApiClient $apiClient)
+    public function __construct(OxiMailingClient $apiClient)
     {
         parent::__construct($apiClient);
     }
@@ -44,7 +44,7 @@ class TrackingAPI extends Component
      * @param int|null $sendingId       (Optional) filter on this sendingid
      * @param string $trackingAccountId (Optional) specify the tracking account you want to use (if not specified, the default account is used)
      * @return array<Event>|null        See : https://api.oximailing.com/doc/#/tracking/get_events
-     * @throws ApiException
+     * @throws OxiMailingException
      */
     public function getEvents(
         string $type,
@@ -92,7 +92,7 @@ class TrackingAPI extends Component
      * @param int $sendingId
      * @param string $lng
      * @return string
-     * @throws ApiException
+     * @throws OxiMailingException
      */
     public function getReportURL(int $sendingId, string $lng = "en"): string
     {
@@ -107,7 +107,7 @@ class TrackingAPI extends Component
      *
      * @param int $sendingId
      * @return object|mixed|null
-     * @throws ApiException
+     * @throws OxiMailingException
      */
     public function getStatisticsForSendingId(int $sendingId): object
     {

@@ -2,8 +2,8 @@
 
 namespace Oxemis\OxiMailing\Components;
 
-use Oxemis\OxiMailing\ApiClient;
-use Oxemis\OxiMailing\ApiException;
+use Oxemis\OxiMailing\OxiMailingClient;
+use Oxemis\OxiMailing\OxiMailingException;
 use Oxemis\OxiMailing\Objects\User;
 
 /**
@@ -12,7 +12,7 @@ use Oxemis\OxiMailing\Objects\User;
 class UserAPI extends Component
 {
 
-    public function __construct(ApiClient $apiClient)
+    public function __construct(OxiMailingClient $apiClient)
     {
         parent::__construct($apiClient);
     }
@@ -21,7 +21,7 @@ class UserAPI extends Component
      * Get informations about your account.
      *
      * @return User           Current user information (see https://api.oximailing.com/doc/#/user).
-     * @throws ApiException
+     * @throws OxiMailingException
      */
     public function getUser(): object
     {

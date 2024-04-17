@@ -2,8 +2,8 @@
 
 namespace Oxemis\OxiMailing\Components;
 
-use Oxemis\OxiMailing\ApiClient;
-use Oxemis\OxiMailing\ApiException;
+use Oxemis\OxiMailing\OxiMailingClient;
+use Oxemis\OxiMailing\OxiMailingException;
 use Oxemis\OxiMailing\Objects\Domain;
 use Oxemis\Oximailing\Objects\ReservedDomain;
 
@@ -13,14 +13,14 @@ use Oxemis\Oximailing\Objects\ReservedDomain;
 class DomainsAPI extends Component
 {
 
-    public function __construct(ApiClient $apiClient)
+    public function __construct(OxiMailingClient $apiClient)
     {
         parent::__construct($apiClient);
     }
 
     /**
      * @return null|array<Domain>   List of domains.
-     * @throws ApiException
+     * @throws OxiMailingException
      */
     public function getDomains(): ?array
     {
@@ -39,7 +39,7 @@ class DomainsAPI extends Component
     /**
      * @param string $domain        The domain for the lookup.
      * @return object|null          Domain object (see doc for properties).
-     * @throws ApiException
+     * @throws OxiMailingException
      */
     public function getDomain(string $domain): ?object
     {
@@ -54,7 +54,7 @@ class DomainsAPI extends Component
     /**
      * @param string $domain        The domain to add on the account.
      * @return bool                 True if OK.
-     * @throws ApiException
+     * @throws OxiMailingException
      */
     public function addDomain(string $domain): bool
     {
@@ -65,7 +65,7 @@ class DomainsAPI extends Component
     /**
      * @param string $domain        The domain you want to delete.
      * @return bool                 True if OK.
-     * @throws ApiException
+     * @throws OxiMailingException
      */
     public function deleteDomain(string $domain): bool
     {
@@ -76,7 +76,7 @@ class DomainsAPI extends Component
     /**
      * @param string $domain        The domain you want to refresh.
      * @return bool                 True if OK.
-     * @throws ApiException
+     * @throws OxiMailingException
      */
     public function refreshDomain(string $domain): bool
     {
@@ -86,7 +86,7 @@ class DomainsAPI extends Component
 
     /**
      * @return null|array<ReservedDomain>                The list of reserved domains.
-     * @throws ApiException
+     * @throws OxiMailingException
      */
     public function getReservedDomains(): ?array
     {

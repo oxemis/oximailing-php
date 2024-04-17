@@ -2,8 +2,8 @@
 
 namespace Oxemis\OxiMailing\Components;
 
-use Oxemis\OxiMailing\ApiClient;
-use Oxemis\OxiMailing\ApiException;
+use Oxemis\OxiMailing\OxiMailingClient;
+use Oxemis\OxiMailing\OxiMailingException;
 use Oxemis\OxiMailing\Objects\Complaint;
 
 /**
@@ -12,14 +12,14 @@ use Oxemis\OxiMailing\Objects\Complaint;
 class ComplaintsAPI extends Component
 {
 
-    public function __construct(ApiClient $apiClient)
+    public function __construct(OxiMailingClient $apiClient)
     {
         parent::__construct($apiClient);
     }
 
     /**
      * @return array                List of complaints
-     * @throws ApiException
+     * @throws OxiMailingException
      */
     public function getComplaints(): ?array
     {

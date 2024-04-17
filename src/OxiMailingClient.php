@@ -14,7 +14,7 @@ use Oxemis\OxiMailing\Components\UserAPI;
 /**
  * API Client for OxiMailing
  */
-class ApiClient
+class OxiMailingClient
 {
 
     private string $auth;

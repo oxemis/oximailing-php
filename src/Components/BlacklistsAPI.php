@@ -2,8 +2,8 @@
 
 namespace Oxemis\OxiMailing\Components;
 
-use Oxemis\OxiMailing\ApiClient;
-use Oxemis\OxiMailing\ApiException;
+use Oxemis\OxiMailing\OxiMailingClient;
+use Oxemis\OxiMailing\OxiMailingException;
 
 /**
  * Class for https://api.oximailing.com/doc/#/blacklists
@@ -11,7 +11,7 @@ use Oxemis\OxiMailing\ApiException;
 class BlacklistsAPI extends Component
 {
 
-    public function __construct(ApiClient $apiClient)
+    public function __construct(OxiMailingClient $apiClient)
     {
         parent::__construct($apiClient);
     }
@@ -20,7 +20,7 @@ class BlacklistsAPI extends Component
      * @param int $lastId               (Optional) Get the bounces added since this ID.
      * @param string $trackingAccountId (Optional) Specify the tracking account id (if not set the default account is used).
      * @return array<string>            List of blacklisted emails (the items index in the array are the IDs of the blacklisted emails).
-     * @throws ApiException
+     * @throws OxiMailingException
      */
     public function getBlacklistedEmails(int $lastId = -1, string $trackingAccountId = ""): ?array
     {
@@ -40,7 +40,7 @@ class BlacklistsAPI extends Component
      * @param string $email             The email of the sender you want to add.
      * @param string $trackingAccountId (Optional) Specify the tracking account id (if not set the default account is used).
      * @return bool                     true means that the address has been added.
-     * @throws ApiException
+     * @throws OxiMailingException
      */
     public function addEmailToBlacklist(string $email, string $trackingAccountId = ""): bool
     {
@@ -52,7 +52,7 @@ class BlacklistsAPI extends Component
      * @param string $email             The email you want to remove.
      * @param string $trackingAccountId (Optional) Specify the tracking account id (if not set, the default account is used).
      * @return bool                     true means that the address has been removed.
-     * @throws ApiException
+     * @throws OxiMailingException
      */
     public function deleteEmailInBlacklist(string $email, string $trackingAccountId = ""): bool
     {
