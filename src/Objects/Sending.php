@@ -2,7 +2,6 @@
 
 namespace Oxemis\OxiMailing\Objects;
 
-use Oxemis\OxiMailing\Objects\ApiObject;
 use stdClass;
 
 /**
@@ -39,7 +38,7 @@ class Sending extends ApiObject
      */
     public function getFiltered(): array
     {
-        return $this->blocked;
+        return $this->filtered;
     }
 
     protected function setFiltered(array $filtered): void
