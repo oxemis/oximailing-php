@@ -95,7 +95,7 @@ In order to send a mail, you must instantiate a `Message` object and, send it, v
 > **PLEASE NOTE**
 > 
 >Before sending any message you **MUST** register your sender email address on your account (or using the `$client->sendersAPI` object).
->Validated senders can be managed on [this page](https://account.oxemis.com/oximailing). If your address is not validated, sending will be refused.
+>Validated senders can be managed on [this page](https://account.oxemis.com/oximailing?senders). If your address is not validated, sending will be refused.
 
 You can add attachments, recipients, CC, BCC and many other options with the `Message` properties.
 Every property of the `Message` object is described with PHPDoc.
