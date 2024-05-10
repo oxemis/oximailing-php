@@ -39,7 +39,7 @@ This library requires **PHP v7.4** or higher.
 
 Use the below code to install the wrapper:
 
-`composer require oxemis/oximailing-php`
+`composer require oxemis/oximailing`
 
 ## Authentication
 
