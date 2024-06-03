@@ -16,6 +16,7 @@ class Domain extends ApiObject
     private bool $spfValid;
     private bool $dkimValid;
     private bool $trckValid;
+    private bool $dmarcValid;
 
     public function getDomain(): string
     {
@@ -67,6 +68,16 @@ class Domain extends ApiObject
         $this->trckValid = $trckValid;
     }
 
+    public function isDmarcValid(): bool
+    {
+        return $this->dmarcValid;
+    }
+
+    protected function setDmarcValid(bool $dmarcValid): void
+    {
+        $this->dmarcValid = $dmarcValid;
+    }
+
     /** Mapping can't be done automatically */
     protected function myMapFromStdClass(stdClass $object)
     {
@@ -74,6 +85,7 @@ class Domain extends ApiObject
         $this->setDkimValid($object->DKIM_valid);
         $this->setSpfValid($object->SPF_valid);
         $this->setTrckValid($object->TRCK_valid);
+        $this->setDmarcValid($object->DMARC_valid);
 
     }
 
