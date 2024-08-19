@@ -27,6 +27,8 @@ class Message implements JsonSerializable
     private string $trackingLogin = "";
     /** @var array<string> List of CCs e-mails */
     private array $cc = array();
+    /** @var array<string> List of Reply-To e-mails */
+    private array $replyTo = array();
     /** @var array<string> List of BCCs e-mails */
     private array $bcc = array();
     /** @var array<Attachment> Attachments of the message */
@@ -463,6 +465,40 @@ class Message implements JsonSerializable
     }
 
     /**
+     * Get the list of Reply-To
+     *
+     * @return string[]
+     */
+    public function getReplyTo(): array
+    {
+        return $this->replyTo;
+    }
+
+    /**
+     *  Set these addresses as Reply-To
+     *
+     * @param string[] $replyTo
+     * @return $this
+     */
+    public function setReplyTo(array $replyTo): Message
+    {
+        $this->replyTo = $replyTo;
+        return $this;
+    }
+
+    /**
+     * @param string $replyTo Add this mail to reply-to
+     * @return $this
+     */
+    public function addReplyTo(string $replyTo): Message
+    {
+        $this->replyTo[] = $replyTo;
+        return $this;
+    }
+
+
+
+    /**
      * Get the list of BCC
      *
      * @return string[]
@@ -553,6 +589,12 @@ class Message implements JsonSerializable
             "Text" => $this->getTxtMessage(),
             "Subject" => $this->getSubject(),
         ];
+
+        //Reply-To
+        if (!empty($this->replyTo)) {
+            $json["Message"]["ReplyTo"] = implode(";", $this->replyTo);
+        }
+
 
         // Headers
         $json["Message"]["Headers"] = array();
