@@ -20,6 +20,14 @@ class OxiMailingClient
     private string $auth;
     private string $baseURL;
     private string $userAgent;
+    public UserAPI $userAPI;
+    public SendersAPI $sendersAPI;
+    public DomainsAPI $domainsAPI;
+    public BouncesAPI $bouncesAPI;
+    public BlacklistsAPI $blacklistsAPI;
+    public ComplaintsAPI $complaintsAPI;
+    public SendAPI $sendAPI;
+    public TrackingAPI $trackingAPI;
 
     public function __construct(string $apiLogin, string $apiPassword) {
 
