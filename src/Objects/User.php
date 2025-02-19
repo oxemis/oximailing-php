@@ -212,7 +212,9 @@ class User extends ApiObject
 
         if (property_exists($object, "SMTPAccess")) {
             $this->setSmtpAccessActive($object->SMTPAccess->Active);
-            $this->setSmtpAccessServer($object->SMTPAccess->Server);
+            if ($object->SMTPAccess->Active) {
+                $this->setSmtpAccessServer($object->SMTPAccess->Server);
+            }
         }
 
         $list = [];

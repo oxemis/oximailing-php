@@ -100,7 +100,7 @@ In order to send a mail, you must instantiate a `Message` object and, send it, v
 You can add attachments, recipients, CC, Reply-To, BCC and many other options with the `Message` properties.
 Every property of the `Message` object is described with PHPDoc.
 
-Here's a simple sample of how to send a mail :
+Here's a simple sample of how to send a mail (**be careful and change the email addresses of the sender and recipients of this example!**):
 
 ```php
 require_once 'vendor/autoload.php';
@@ -113,12 +113,13 @@ $apipwd = 'your API password';
 $client = new OxiMailingClient($apilogin, $apipwd);
 
 // Define the message
+// TODO : be careful and change the email addresses of the sender and recipients of this example!
 $mail = new Message();  
 $mail
-->addRecipientEmail("joe@example.com") 
+->addRecipientEmail("joe@example.com")
 ->addRecipientEmail("jane@example.com") 
-->setSender("support@oxemis.com") 
-->setSenderName("Oxemis") 
+->setSender("support@example.com") 
+->setSenderName("Your name") 
 ->setSubject("Hello world !")
 ->setHtmlMessage("Hi there ! This is my first email sent with the awesome oximailing-php library !");
 
@@ -153,11 +154,12 @@ $mySecondRecipient->setEmail("jane@example.com");
 $mySecondRecipient->setMetaData(["Name" => "Jane", "ID" => 2]);
 
 // We create the message with {{custom parts}}
+// TODO : be careful and change the email addresses of the sender and recipients of this example!
 $mail = new Message();  
 $mail->addRecipient($myFirstRecipient) 
 ->addRecipient($mySecondRecipient) 
-->setSender("support@oxemis.com") 
-->setSenderName("Oxemis") 
+->setSender("support@example.com") 
+->setSenderName("Your name") 
 ->setSubject("Hello {{Name}} !")
 ->setHtmlMessage("Hi {{Name}} ! This is your ID : {{ID}}");
 
@@ -178,12 +180,13 @@ require_once 'vendor/autoload.php';
 use Oxemis\OxiMailing\Objects\Message;
 
 // Define the message
+// TODO : be careful and change the email addresses of the sender and recipients of this example!
 $mail = new Message();  
 $mail
 ->addRecipientEmail("joe@example.com") 
 ->addRecipientEmail("jane@example.com") 
-->setSender("support@oxemis.com") 
-->setSenderName("Oxemis") 
+->setSender("support@example.com") 
+->setSenderName("Your name") 
 ->setSubject("Hello world !")
 ->setHtmlMessage("Hi there ! This is my first email sent with the <a href='https://github.com/oxemis/oximailing-php'>awesome oximailing-php library !</a>")
 ->setTrackEmails(true);

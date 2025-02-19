@@ -3,8 +3,8 @@
 namespace Oxemis\OxiMailing\Components;
 
 use GuzzleHttp\Client as GuzzleClient;
-use GuzzleHttp\Exception\GuzzleException;
 use Oxemis\OxiMailing\OxiMailingClient;
+use GuzzleHttp\Exception\RequestException;
 use Oxemis\OxiMailing\OxiMailingException;
 
 /**
@@ -63,7 +63,7 @@ abstract class Component {
                 throw new OxiMailingException($res->getBody(), $res->getStatusCode());
             }
 
-        } catch (GuzzleException $e) {
+        } catch (RequestException $e) {
 
             // Exception catched, we get the response
             $response = $e->getResponse();
